@@ -1,327 +1,180 @@
-/* ===== Reset / base ===== */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-  color: #EAF2F9;
-  background: radial-gradient(1200px 600px at 30% -10%, #0E2A47 0%, #0B1C2C 35%, #071521 100%) fixed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; text-decoration: none; }
-
-/* ===== Container ===== */
-.container {
-  width: min(1200px, 92vw);
-  margin-inline: auto;
+/* ====== Variáveis ====== */
+:root{
+  --bg-1:#071523;
+  --bg-2:#0c2135;
+  --card:#0e2a44;
+  --text:#e9f2fb;
+  --muted:#b6c7d8;
+  --brand:#20c25e;
+  --brand-2:#19a04e;
+  --white:#fff;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-/* ===== Buttons ===== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  height: 44px;
-  padding: 0 18px;
-  border-radius: 12px;
-  border: 0;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .08s ease, box-shadow .2s ease, color .2s ease, background .2s ease;
-}
-.btn:active { transform: translateY(1px); }
-
-.btn-primary {
-  background: #15A34A;
-  color: #08131D;
-  box-shadow: 0 10px 28px rgba(21,163,74,.35);
-}
-.btn-primary:hover { background:#19B356; }
-
-.btn-ghost {
-  background: transparent;
-  color: #C9E3F6;
-  border: 1.5px solid rgba(201,227,246,.25);
-}
-.btn-ghost:hover { border-color: rgba(201,227,246,.45); }
-
-.btn-lg { height: 52px; padding-inline: 22px; font-size: 1.05rem; }
-.full { width: 100%; }
-
-.btn-wa {
-  background: #16A34A;
-  color: #0B1723;
-  padding-inline: 20px;
-  border-radius: 14px;
-}
-.btn-wa:hover { background: #1BBC58; }
-
-/* glow sutil para CTAs principais */
-.shadow-glow {
-  box-shadow: 0 18px 40px rgba(21,163,74,.35), 0 2px 10px rgba(21,163,74,.25);
+/* ====== Reset básico ====== */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, Helvetica, sans-serif;
+  color:var(--text);
+  background: radial-gradient(1200px 600px at 30% -20%, #0d2b45 0%, transparent 60%),
+              radial-gradient(1200px 600px at 70% -10%, #092038 0%, transparent 60%),
+              linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  line-height:1.5;
 }
 
-/* ===== Header / Navbar ===== */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: linear-gradient(180deg, rgba(6,16,26,.85), rgba(6,16,26,.55));
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,.05);
-}
-.header-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  height: 72px;
-}
+/* Helpers */
+.container{width:min(1200px, 92vw); margin-inline:auto}
+.section-title{font-size: clamp(1.4rem, 1.2rem + 1.2vw, 2rem); margin:0 0 1rem}
+.lead{color:var(--muted)}
+img{max-width:100%; height:auto; display:block}
 
-.site-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+/* ====== Header fixo ====== */
+.site-header{
+  position:fixed; inset:0 0 auto 0; height:76px; z-index:1000;
+  background: linear-gradient(180deg, rgba(3,10,18,.75), rgba(3,10,18,.35));
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-.site-brand .logo {
-  height: 28px;   /* mobile */
+.header-inner{
+  height:76px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.brand{display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--white)}
+.brand-logo{
+  height: clamp(28px, 4.2vw, 48px);
   width: auto;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.25));
 }
-.site-brand .brand-name {
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: .2px;
+.brand-name{font-size: clamp(1rem, .8rem + .6vw, 1.25rem); opacity:.95}
+.main-nav{display:flex; gap:12px}
+
+/* compensar header fixo */
+main{padding-top:86px}
+
+/* ====== Botões ====== */
+.btn{
+  --padX: 18px; --padY: 12px;
+  padding:var(--padY) var(--padX);
+  border-radius:12px;
+  text-decoration:none; color:var(--white);
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  border:1px solid transparent;
+  font-weight:600;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+
+.btn-primary{
+  background:linear-gradient(180deg, var(--brand), var(--brand-2));
+  box-shadow: 0 10px 24px rgba(32,194,94,.35);
+}
+.btn-primary:hover{box-shadow: 0 16px 32px rgba(32,194,94,.45)}
+.btn-primary.btn-xl{--padX:26px; --padY:16px; border-radius:16px}
+
+.btn-ghost{
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+}
+.btn-ghost:hover{background: rgba(255,255,255,.12)}
+
+.btn-whats{background:linear-gradient(180deg, #25D366, #1ea653)}
+
+/* ====== Hero ====== */
+.hero{padding: clamp(24px, 2vw, 32px) 0 32px}
+.hero-grid{
+  display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 2.2vw, 36px); align-items:center;
+}
+.hero-media{
+  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04);
+  box-shadow: var(--shadow);
+}
+.hero-media img{
+  width:100%; height: clamp(280px, 36vw, 520px);
+  object-fit: cover; object-position:center;
+  display:block;
+}
+.hero-copy h1{margin:0 0 12px; font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem)}
+.hero-copy p{color:var(--muted); margin:0 0 18px}
+.cta-row{display:flex; gap:12px; flex-wrap:wrap}
+
+/* ====== Features ====== */
+.features{padding: 28px 0 10px}
+.card-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;
+}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px; padding:22px; box-shadow: var(--shadow);
+}
+.card .icon{font-size:26px; margin-bottom:8px}
+.card h3{margin:0 0 8px}
+
+/* ====== Sobre ====== */
+.about{padding: 18px 0 12px}
+.about-grid{
+  display:grid; grid-template-columns: 1fr 1.05fr; gap: clamp(18px, 2vw, 28px); align-items:center;
+}
+.about-media{
+  border-radius:28px; overflow:hidden; box-shadow: var(--shadow);
+  background:rgba(255,255,255,.04);
+}
+.about-media img{
+  width:100%; height: clamp(320px, 38vw, 560px); object-fit: cover; object-position: center 25%;
+}
+.about-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
+.about-copy p{color:var(--muted); margin:0 0 10px}
+.about-copy .btn{margin-top:10px}
+
+/* ====== Cardápio ====== */
+.menu{padding: 8px 0 28px}
+.menu-grid{
+  display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(18px, 2vw, 30px); align-items:center;
+}
+.menu-media{
+  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04); box-shadow: var(--shadow);
+}
+.menu-media img{
+  width:100%; height: clamp(300px, 36vw, 520px); object-fit: cover; object-position:center;
+}
+.menu-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
+.menu-copy p{color:var(--muted); margin:0 0 16px}
+
+/* ====== Plano (form) ====== */
+.plan{padding: 20px 0 26px}
+.plan h2{margin:0 0 8px; font-size: clamp(1.4rem, 1rem + 1.2vw, 2rem)}
+.plan .lead{margin:0 0 18px}
+.wa-form{display:grid; gap:14px}
+.grid-2{display:grid; gap:14px; grid-template-columns: repeat(2, 1fr)}
+label{display:grid; gap:6px; font-weight:600}
+input, select{
+  height:48px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06); color:var(--text); padding:0 14px; outline:none;
+}
+input::placeholder{color:rgba(255,255,255,.45)}
+.hint{color:var(--muted); margin:8px 0 0}
+
+/* ====== Social ====== */
+.social{padding: 10px 0 24px}
+
+/* ====== Footer ====== */
+.site-footer{padding:18px 0 26px; color:var(--muted); font-size:.95rem}
+.site-footer a{color:var(--text)}
+
+/* ====== Responsivo ====== */
+@media (max-width: 960px){
+  .hero-grid,
+  .about-grid,
+  .menu-grid{grid-template-columns: 1fr}
+  .about-media img,
+  .menu-media img{height: clamp(280px, 50vw, 420px)}
 }
 
-.nav { display: inline-flex; align-items: center; gap: 12px; }
-.nav-link {
-  display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
-  border-radius: 12px; color: #DDECF9;
-  border: 1px solid rgba(221,236,249,.12);
-}
-.nav-link:hover { border-color: rgba(221,236,249,.32); }
-
-/* Desktop brand size boost */
-@media (min-width: 768px) {
-  .site-brand .logo { height: 40px; }
-  .site-brand .brand-name { font-size: 1.2rem; }
-}
-@media (min-width: 1024px) {
-  .site-brand .logo { height: 56px; }      /* destaque real */
-  .site-brand .brand-name { font-size: 1.35rem; }
-}
-
-/* ===== Hero ===== */
-.hero { padding: 28px 0 8px; }
-.hero-grid {
-  display: grid;
-  gap: 24px;
-  align-items: center;
-}
-.hero-art img {
-  border-radius: 18px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.35);
-}
-.hero-copy h1 {
-  margin: 0 0 12px;
-  font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.15;
-}
-.hero-copy p { color: #CFE6F7; margin: 0 0 18px; }
-.hero-ctas { display: inline-flex; gap: 10px; }
-
-@media (min-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: 1.15fr .95fr;
-    gap: 32px;
-  }
-}
-
-/* ===== Features ===== */
-.features {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr;
-  margin: 28px auto 8px;
-}
-@media (min-width: 880px) {
-  .features { grid-template-columns: repeat(3,1fr); }
-}
-.feature-card {
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 16px;
-  padding: 18px 18px;
-  box-shadow: 0 14px 36px rgba(0,0,0,.25);
-}
-.feature-emoji { font-size: 22px; opacity: .95; }
-.feature-card h3 { margin: 6px 0 4px; }
-.feature-card p { margin: 0; color: #CFE6F7; }
-
-/* ===== About ===== */
-.about { padding: 30px 0; }
-.about .grid {
-  display: grid;
-  gap: 22px;
-  align-items: center;
-}
-.about .photo img {
-  max-width: 520px;    /* evita foto gigante no desktop */
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 26px 60px rgba(0,0,0,.35);
-}
-.about .copy h2 { margin: 0 0 10px; font-size: clamp(24px, 3.4vw, 36px); }
-.about .copy p { margin: 0 0 12px; line-height: 1.65; color: #D3E5F7; }
-.about .cta { margin-top: 28px; } /* RESPIRO DO CTA */
-
-@media (min-width: 1024px) {
-  .about .grid { grid-template-columns: 0.95fr 1.05fr; gap: 32px; }
-  .about .cta { margin-top: 36px; }
-}
-
-/* ===== Menu (Cardápio da semana) ===== */
-.menu-section { padding: 20px 0 8px; }
-.menu-grid {
-  display: grid;
-  gap: 24px;
-  align-items: center;
-}
-.menu-photo img {
-  border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(0,0,0,.35);
-}
-.menu-copy h2 { margin: 0 0 10px; font-size: clamp(24px, 3.4vw, 36px); }
-.menu-copy p { color: #CFE6F7; margin: 0 0 18px; }
-
-/* Em caso de HTML antigo com <ul>, escondemos a lista para manter pedido */
-.menu-section ul { display: none !important; }
-
-@media (min-width: 1024px) {
-  .menu-grid { grid-template-columns: 1.05fr .95fr; gap: 30px; }
-}
-
-/* ===== Plano / Form WhatsApp ===== */
-.plan { padding: 22px 0 10px; }
-.plan-card {
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 18px;
-  padding: 18px 16px;
-  box-shadow: 0 20px 48px rgba(0,0,0,.28);
-}
-.plan-card h2 { margin: 0 0 10px; font-size: clamp(22px, 3vw, 32px); }
-.plan-card p { margin: 0 0 18px; color: #D3E5F7; }
-
-.wa-form { display: grid; gap: 12px; }
-.wa-form .row { display: grid; gap: 8px; }
-.wa-form .row.two {
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.wa-form label { font-size: .95rem; color: #EAF2F9; }
-.wa-form input, .wa-form select {
-  height: 44px;
-  padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(7,17,27,.55);
-  color: #EAF2F9;
-  outline: none;
-}
-.wa-form input::placeholder { color: #9FB9CF; }
-.form-note { color: #BFD8ED; margin: 10px 0 0; font-size: .95rem; }
-
-@media (max-width: 680px) {
-  .wa-form .row.two { grid-template-columns: 1fr; }
-}
-
-/* ===== Testimonial ===== */
-.testimonial { padding: 22px 0 16px; }
-.testimonial h2 { margin: 0 0 12px; font-size: clamp(22px, 3vw, 32px); }
-.ig-embed img { border-radius: 16px; box-shadow: 0 16px 42px rgba(0,0,0,.3); }
-
-/* ===== Footer ===== */
-.site-footer { padding: 22px 0 38px; }
-.footer-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  border-top: 1px solid rgba(255,255,255,.06);
-  padding-top: 16px;
-  color: #CFE6F7;
-}
-.footer-wa { color: #9ED9B7; font-weight: 700; }
-.footer-wa:hover { color: #B6F1CF; }
-
-/* ====================== */
-/* HOTFIX HEADER + HERO   */
-/* ====================== */
-
-/* 1) Força estilos de links no header (evita "azul sublinhado" se a classe não vier) */
-.site-header a {
-  color: #EAF2F9 !important;
-  text-decoration: none !important;
-}
-
-/* 2) Garante que os botões do nav existam mesmo se alguém mudar classes no HTML */
-.site-header .nav a {
-  display: inline-flex;
-  align-items: center;
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(221,236,249,.12);
-  background: transparent;
-}
-.site-header .nav a:hover { border-color: rgba(221,236,249,.32); }
-
-/* 3) WhatsApp do header com visual de botão, independentemente do nome da classe */
-.site-header .nav a[href*="wa.me"] {
-  background: #16A34A;
-  border-color: transparent;
-  color: #08131D !important;
-  font-weight: 700;
-  border-radius: 14px;
-  padding: 0 18px;
-  box-shadow: 0 10px 28px rgba(21,163,74,.35);
-}
-.site-header .nav a[href*="wa.me"]:hover { background:#19B356; }
-
-/* 4) Logo: limites rígidos por breakpoint (impede de “estourar”) */
-.site-header .site-brand img.logo {
-  height: 28px;           /* mobile default */
-  max-width: 180px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
-}
-@media (min-width: 768px) {
-  .site-header .site-brand img.logo { height: 40px; max-width: 240px; }
-}
-@media (min-width: 1024px) {
-  .site-header .site-brand img.logo { height: 56px; max-width: 320px; }
-}
-
-/* 5) Hero: corta a imagem com object-fit pra não ficar desproporcional em telas altas */
-.hero-art {
-  overflow: hidden;
-  border-radius: 18px;
-}
-.hero-art img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* em telas bem estreitas, usa proporção controlada pra não ficar infinito de alto */
-@media (max-width: 480px) {
-  .hero-art { aspect-ratio: 4 / 3; }
-}
-
-/* 6) Garantia extra de respiro entre texto e CTA na seção "Sobre a chef" (mobile) */
-.about .cta { margin-top: 24px; }
-@media (min-width: 1024px) {
-  .about .cta { margin-top: 36px; }
+@media (max-width: 720px){
+  .main-nav .btn{padding:10px 14px}
+  .grid-2{grid-template-columns: 1fr}
+  .brand-logo{height:42px}
+  .card-grid{grid-template-columns: 1fr}
+  .hero-media img{height: clamp(240px, 55vw, 360px)}
 }

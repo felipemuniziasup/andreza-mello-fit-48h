@@ -54,7 +54,7 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
   const form = $("#waForm");
   if (!form) return;
 
-  // Número correto da Andreza (sem espaços ou traços)
+  // Número correto da Andreza
   const WA_PHONE = "5521995837591";
   const endpoint = `https://wa.me/${WA_PHONE}`;
 
