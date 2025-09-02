@@ -31,17 +31,17 @@ img{max-width:100%; height:auto; display:block}
 
 /* ====== Header fixo (logo maior) ====== */
 .site-header{
-  position:fixed; inset:0 0 auto 0; height:104px; z-index:1000; /* antes 88px */
+  position:fixed; inset:0 0 auto 0; height:88px; z-index:1000;
   background: linear-gradient(180deg, rgba(3,10,18,.78), rgba(3,10,18,.42));
   backdrop-filter: blur(8px);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 .header-inner{
-  height:104px; display:flex; align-items:center; justify-content:space-between; gap:16px; /* antes 88px */
+  height:88px; display:flex; align-items:center; justify-content:space-between; gap:16px;
 }
 .brand{display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--white)}
 .brand-logo{
-  height: clamp(56px, 7.2vw, 88px); /* antes clamp(40px, 5.8vw, 64px) */
+  height: clamp(40px, 5.8vw, 64px);
   width: auto;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,.25));
 }
@@ -49,7 +49,7 @@ img{max-width:100%; height:auto; display:block}
 .main-nav{display:flex; gap:12px}
 
 /* compensar header fixo */
-main{padding-top:116px} /* antes 98px */
+main{padding-top:98px}
 
 /* ====== Botões ====== */
 .btn{
@@ -80,29 +80,43 @@ main{padding-top:116px} /* antes 98px */
 
 .btn-whats{background:linear-gradient(180deg, #25D366, #1ea653)}
 
+/* ====== Blocos de mídia sem corte (automático) ====== */
+.media-box{
+  border-radius:24px;
+  overflow:hidden;
+  background:rgba(255,255,255,.04);
+  box-shadow: var(--shadow);
+
+  /* proporção “fallback”; o JS ajusta depois para a real */
+  aspect-ratio: var(--ar, 16/10);
+
+  /* limites de altura por seção (refinados abaixo) */
+}
+
+.media-box img{
+  width:100%;
+  height:100%;
+  object-fit: contain;          /* mostra a imagem inteira, sem cortar */
+  object-position:center;
+  background:#0c2135;          /* cor nas bordas que sobram */
+  display:block;
+}
+
 /* ====== Hero ====== */
 .hero{padding: clamp(24px, 2vw, 32px) 0 32px}
 .hero-grid{
   display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 2.2vw, 36px); align-items:center;
 }
-.hero-media{
-  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04);
-  box-shadow: var(--shadow);
-}
-.hero-media img{
-  width:100%; height: clamp(280px, 36vw, 520px);
-  object-fit: cover; object-position:center;
-  display:block;
-}
+/* limite de altura do bloco hero */
+.hero .media-box{ max-height: clamp(280px, 36vw, 520px); }
+
 .hero-copy h1{margin:0 0 12px; font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem)}
 .hero-copy p{color:var(--muted); margin:0 0 18px}
 .cta-row{display:flex; gap:12px; flex-wrap:wrap}
 
 /* ====== Features ====== */
 .features{padding: 28px 0 10px}
-.card-grid{
-  display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;
-}
+.card-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.06);
@@ -116,16 +130,7 @@ main{padding-top:116px} /* antes 98px */
 .about-grid{
   display:grid; grid-template-columns: 1fr 1.05fr; gap: clamp(18px, 2vw, 28px); align-items:center;
 }
-.about-media{
-  border-radius:28px; overflow:hidden; box-shadow: var(--shadow);
-  background:rgba(255,255,255,.04);
-}
-.about-media img{
-  width:100%;
-  height: clamp(320px, 38vw, 560px);
-  object-fit: cover;
-  object-position: 50% 28%; /* foco sobe levemente no desktop */
-}
+.about .media-box{ border-radius:28px; max-height: clamp(320px, 38vw, 560px); }
 .about-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
 .about-copy p{color:var(--muted); margin:0 0 10px}
 .about-copy .btn{margin-top:10px}
@@ -135,12 +140,7 @@ main{padding-top:116px} /* antes 98px */
 .menu-grid{
   display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(18px, 2vw, 30px); align-items:center;
 }
-.menu-media{
-  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04); box-shadow: var(--shadow);
-}
-.menu-media img{
-  width:100%; height: clamp(300px, 36vw, 520px); object-fit: cover; object-position:center;
-}
+.menu .media-box{ max-height: clamp(300px, 36vw, 520px); }
 .menu-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
 .menu-copy p{color:var(--muted); margin:0 0 16px}
 
@@ -171,22 +171,15 @@ input::placeholder{color:rgba(255,255,255,.45)}
   .about-grid,
   .menu-grid{grid-template-columns: 1fr}
 
-  /* Sobre: quadro mais alto e foco sobe um pouco no mobile */
-  .about-media{
-    aspect-ratio: 3 / 4;
-  }
-  .about-media img{
-    height: 100%;
-    object-position: 50% 23%;
-  }
-
-  .menu-media img{height: clamp(280px, 50vw, 420px)}
+  /* quadros mais altos no mobile */
+  .about .media-box{ max-height: clamp(320px, 60vw, 560px); }
+  .menu  .media-box{ max-height: clamp(300px, 55vw, 520px); }
 }
 
 @media (max-width: 720px){
   .main-nav .btn{padding:10px 14px}
   .grid-2{grid-template-columns: 1fr}
-  .brand-logo{height:76px} /* antes 60px */
+  .brand-logo{height:60px} /* logo maior no mobile */
   .card-grid{grid-template-columns: 1fr}
-  .hero-media img{height: clamp(240px, 55vw, 360px)}
+  .hero .media-box{ max-height: clamp(240px, 55vw, 360px); }
 }
