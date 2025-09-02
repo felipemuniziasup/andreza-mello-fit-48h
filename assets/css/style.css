@@ -1,215 +1,249 @@
-/* =========================================================
-   Andreza Mello Fit — style.css (premium, responsivo, acessível)
-   ========================================================= */
-
 :root{
-  /* cores base */
-  --bg-1: #0e2130;
-  --bg-2: #0a1622;
-  --glass: rgba(255,255,255,.06);
-  --ink: #eaf6ff;            /* texto claro no fundo escuro */
-  --ink-soft:#c9d8e6;
-  --muted:#9fb2c6;
-
-  /* superfícies claras (cards) */
-  --card: #ffffff;
-  --ink-dark: #0f172a;       /* texto escuro em cards claros */
-  --muted-dark:#6b7280;
-
-  /* marca (verde WhatsApp premium) */
-  --brand:#22c55e;
-  --brand-600:#1fb557;
-  --brand-700:#16a34a;
-
-  /* efeitos */
-  --ring:#cbd5e1;
-  --shadow: 0 14px 36px rgba(2,6,23,.22), 0 2px 8px rgba(2,6,23,.08);
-  --shadow-soft: 0 8px 24px rgba(2,6,23,.18);
-
-  /* raios */
-  --r-lg: 20px;
-  --r-md: 16px;
-  --r-sm: 12px;
+  --bg-1:#06101e;
+  --bg-2:#0b1a2d;
+  --card:#0f223a;
+  --ink:#eaf3ff;
+  --ink-2:#c9d7ee;
+  --primary:#22c55e;
+  --primary-2:#16a34a;
+  --wa:#25d366;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --radius:18px;
 }
 
-/* reset simples */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-  line-height:1.55;
-  color: var(--ink);
-  background:
-    radial-gradient(1100px 700px at 12% -10%, #12324a 0%, transparent 60%),
-    radial-gradient(1000px 700px at 100% -15%, #0f2b4a 0%, transparent 55%),
-    linear-gradient(180deg, var(--bg-1), var(--bg-2));
-  background-attachment: fixed;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background: radial-gradient(1200px 600px at 20% -10%, #12325c 0%, transparent 60%),
+              radial-gradient(1000px 600px at 90% 10%, #0a2a47 0%, transparent 60%),
+              linear-gradient(180deg, var(--bg-1), var(--bg-2));
 }
 
-/* utilidades */
-img{max-width:100%; height:auto; display:block; border-radius: var(--r-lg)}
-.container{width:min(1140px, 92vw); margin-inline:auto}
-.hide{display:none !important}
+/* WRAP */
+.wrap{
+  width:min(1200px, 92vw);
+  margin-inline:auto;
+}
 
-/* ===================== HEADER ===================== */
+/* HEADER FIXO */
 .site-header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(150%) blur(10px);
-  background: rgba(10,22,34,.45);
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  position:fixed;
+  inset:0 0 auto 0;
+  height:72px;
+  z-index:1000;
+  backdrop-filter:saturate(140%) blur(10px);
+  background:linear-gradient(180deg, rgba(6,16,30,.75), rgba(6,16,30,.35));
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-.header-wrap{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 0;
+.site-header .wrap{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
 }
 .brand{
-  display:flex; align-items:center; gap:10px;
-  color:#e5f2ff; text-decoration:none; font-weight:700; letter-spacing:.2px
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--ink);
 }
-.brand img{width:32px; height:32px; border-radius:10px; background:#0b2031}
-.brand strong{font-weight:800}
-
-.main-nav{display:flex; align-items:center; gap:12px}
-.nav-link{
-  color:#cfe6ff; text-decoration:none; font-weight:600;
-  padding:10px 14px; border-radius:12px
+.brand img{
+  display:block;
+  height:44px; /* logo maior */
+  width:auto;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
 }
-.nav-link:hover{background:rgba(255,255,255,.06)}
+.brand-text{
+  font-weight:600;
+  letter-spacing:.2px;
+  font-size:18px;
+}
+.brand-text strong{font-weight:800}
 
-/* botões */
+.nav{
+  display:flex; align-items:center; gap:14px;
+}
+.nav .link{
+  color:var(--ink-2);
+  text-decoration:none;
+  font-weight:600;
+}
+.nav .link:hover{color:var(--ink)}
+
 .btn{
-  appearance:none; border:0; border-radius:14px;
-  padding:12px 18px; font-weight:800; cursor:pointer;
-  text-decoration:none; display:inline-flex; align-items:center; justify-content:center;
-  transition: transform .06s ease, box-shadow .2s ease, filter .2s ease;
+  --b:#ffffff;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px;
+  padding:.85rem 1.15rem;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:700;
+  transition:.2s ease-in-out;
+  box-shadow:var(--shadow);
 }
-.btn:active{transform:translateY(1px)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
 .btn-primary{
-  color:#042312;
-  background: linear-gradient(180deg, var(--brand), var(--brand-600));
-  box-shadow: 0 12px 22px rgba(34,197,94,.30);
+  background:linear-gradient(180deg, var(--primary), var(--primary-2));
+  border-color:rgba(255,255,255,.14);
+  color:#06101e;
 }
-.btn-primary:hover{filter:saturate(1.05) brightness(1.03)}
 .btn-ghost{
-  color:#e6f4ff; background: transparent; border:1px solid rgba(255,255,255,.18)
+  background:transparent;
+  color:var(--ink);
 }
-.btn-ghost:hover{background: rgba(255,255,255,.06)}
-.btn-whatsapp{
-  color:#062b16; background: linear-gradient(180deg, #25d366, #1fb557);
-  box-shadow: 0 12px 24px rgba(37,211,102,.32);
+.btn-lg{padding:1rem 1.3rem; font-size:1rem}
+.btn-wa{
+  background:linear-gradient(180deg,#37e07c,#12c154);
+  border-color:rgba(255,255,255,.14);
+  color:#04131b;
 }
-.btn-whatsapp:hover{filter:saturate(1.06) brightness(1.02)}
-.btn-lg{padding:14px 22px; border-radius:16px}
-.btn-wide{width:100%}
 
-/* ===================== HERO ===================== */
-.hero{padding:56px 0 28px}
+/* empurra o conteúdo por causa do header fixo */
+main{padding-top:84px}
+
+/* HERO */
+.hero{position:relative; isolation:isolate}
+.hero-media{
+  position:absolute; inset:0; z-index:-2;
+}
+.hero-media img{
+  width:100%; height:580px; object-fit:cover; object-position:center;
+  display:block;
+}
+.hero-overlay{
+  position:absolute; inset:0; z-index:-1;
+  background:
+    radial-gradient(900px 500px at 20% 40%, rgba(5,12,22,.65) 0%, rgba(5,12,22,.85) 60%),
+    linear-gradient(90deg, rgba(5,12,22,.85) 0%, rgba(5,12,22,.2) 65%);
+}
 .hero-grid{
-  display:grid; gap:36px; align-items:center;
-  grid-template-columns: 1.1fr 1fr;
+  min-height:580px;
+  display:grid;
+  align-items:center;
 }
-.hero-media img{box-shadow: var(--shadow)}
-.hero-text h1{
-  font-weight:900; letter-spacing:-.02em;
-  font-size: clamp(32px, 4.6vw, 56px);
-  margin:0 0 14px
+.hero-copy{
+  max-width:720px;
+  background:rgba(8,15,27,.45);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  padding:26px 28px;
+  box-shadow:var(--shadow);
 }
-.hero-text p{color: var(--ink-soft); font-size:18px; margin:0 0 20px}
-.hero-ctas{display:flex; gap:12px; flex-wrap:wrap}
+.hero h1{
+  font-size: clamp(34px, 4vw, 56px);
+  line-height:1.06;
+  margin:0 0 12px;
+}
+.lead{color:var(--ink-2); margin:0 0 18px}
+.actions{display:flex; gap:12px; flex-wrap:wrap}
 
-/* ===================== DIFERENCIAIS ===================== */
-.diferenciais{padding:30px 0 12px}
-.diferenciais h2{font-size:32px; margin:0 0 16px}
-.cards-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+/* FEATURES */
+.features{padding:42px 0 12px}
+.cards-3{display:grid; gap:18px; grid-template-columns:repeat(3,1fr)}
 .card{
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+  background:rgba(15,34,58,.45);
   border:1px solid rgba(255,255,255,.08);
-  border-radius: var(--r-md);
-  padding:22px; box-shadow: var(--shadow-soft);
+  border-radius:var(--radius);
+  padding:20px 22px;
+  box-shadow:var(--shadow);
 }
-.card-emoji{font-size:24px; margin-bottom:8px}
-.card h3{margin:8px 0 6px; font-size:20px}
-.card p{margin:0; color: var(--muted)}
+.card h3{margin:8px 0 6px}
+.card p{margin:0; color:var(--ink-2)}
+.emoji{font-size:28px}
 
-/* ===================== SOBRE A CHEF ===================== */
-.sobre-chef{padding:30px 0}
-.about-grid{display:grid; gap:28px; grid-template-columns: .95fr 1.05fr}
-.about-text h2{font-size:32px; margin:0 0 10px}
-.about-text p{color: var(--ink-soft); margin:0 0 12px}
-.about-cta{margin-top:12px}
+/* ABOUT */
+.about{padding:32px 0}
+.about-grid{
+  display:grid; gap:28px; grid-template-columns: 520px 1fr;
+  align-items:center;
+}
+.about .photo img{
+  width:100%; height:560px; object-fit:cover; border-radius:28px; display:block;
+  box-shadow:var(--shadow);
+}
+.about .text h2{margin:0 0 10px}
+.about .text p{color:var(--ink-2)}
+.about .text .btn{margin-top:10px}
 
-/* ===================== CARDÁPIO ===================== */
-.cardapio-semana{padding:18px 0 18px}
-.menu-grid{display:grid; gap:28px; grid-template-columns: .95fr 1.05fr; align-items:center}
-.menu-text h2{font-size:32px; margin:0 0 8px}
-.menu-text p{color: var(--ink-soft); margin:0 0 10px}
+/* MENU */
+.menu{padding:24px 0 8px}
+.menu-grid{
+  display:grid; gap:28px; grid-template-columns: 540px 1fr; align-items:center;
+}
+.menu .photo img{
+  width:100%; height:420px; object-fit:cover; border-radius:28px; display:block;
+  box-shadow:var(--shadow);
+}
+.menu .text h2{margin:0 0 8px}
+.menu .lead{margin-bottom:12px}
+.menu-list{margin:0 0 14px 18px; color:var(--ink) }
+.menu-list li{margin:6px 0}
 
-/* ===================== DEPOIMENTOS ===================== */
-.depoimentos{padding:22px 0}
-.depoimentos h2{font-size:28px; margin:0 0 12px}
-.insta-card img{box-shadow: var(--shadow)}
-
-/* ===================== PLANO (FORM) ===================== */
-.plano-section{padding:8px 0 44px}
-.plano-card{
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
+/* FORM WHATSAPP */
+.pricing{padding:18px 0 8px}
+.form-card{
+  background:rgba(15,34,58,.55);
   border:1px solid rgba(255,255,255,.08);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow);
-  padding: 22px;
+  border-radius:28px;
+  padding:22px;
+  box-shadow:var(--shadow);
 }
-.plano-card h2{margin:0 0 8px; font-size:28px}
-.plano-card p{color: var(--ink-soft); margin:0 0 14px}
+.form-card h2{margin:0 0 6px}
+.form-card .muted{color:var(--ink-2)}
+.form-card .small{font-size:.92rem}
+form{margin-top:10px}
+.row{display:flex; gap:16px; flex-wrap:wrap}
+.field{display:flex; flex-direction:column; gap:6px; min-width:220px}
+.field.grow{flex:1 1 320px}
+label{font-weight:600}
+input,select{
+  height:44px; padding:0 12px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(3,10,18,.6);
+  color:var(--ink);
+}
+input::placeholder{color:#9fb3cf}
 
-form .grid-2{display:grid; gap:14px; grid-template-columns: 1fr 1fr}
-.field{display:grid; gap:8px}
-.field span{font-size:14px; color:#d5e7f7}
-input, select{
-  width:100%; padding:12px 14px; border-radius:12px;
-  border:1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-  color: var(--ink);
-  outline:none;
-  transition: border-color .2s, box-shadow .2s, background .2s;
-  font-size:16px; /* evita zoom em iOS */
+/* TESTIMONIAL */
+.testimonial{padding:30px 0 60px}
+.testimonial h2{margin:0 0 14px}
+.insta{
+  margin:0; background:rgba(15,34,58,.45);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px; overflow:hidden; box-shadow:var(--shadow);
 }
-input::placeholder{color:#a7bdd2}
-input:focus, select:focus{
-  border-color: rgba(34,197,94,.55);
-  box-shadow: 0 0 0 4px rgba(34,197,94,.18);
-}
-.note{color: var(--muted); font-size:.95rem; margin:10px 4px 0}
+.insta img{display:block; width:100%; height:auto}
 
-/* Evita shift visual após enviar (tamanho estável) */
-.plano-card button[type="submit"]{
-  min-width: 280px;
-  height: 52px;
+/* FOOTER */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:18px 0 32px; color:var(--ink-2);
 }
-
-/* ===================== FOOTER ===================== */
-.site-footer{padding:22px 0; border-top:1px solid rgba(255,255,255,.06)}
-.footer-wrap{
-  display:flex; align-items:center; justify-content:space-between;
-  color:#cfe2f6
+.site-footer .wrap{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
 }
-.footer-wa{color:#a7f3c6; text-decoration:none}
-.footer-wa:hover{text-decoration:underline}
+.link-wa{color:var(--ink); text-decoration:none; font-weight:700}
 
-/* ===================== RESPONSIVO ===================== */
-@media (max-width: 1080px){
-  .hero-grid, .about-grid, .menu-grid{grid-template-columns:1fr}
-  form .grid-2{grid-template-columns:1fr}
+/* RESPONSIVO */
+@media (max-width: 1024px){
+  .about-grid{grid-template-columns:1fr; }
+  .menu-grid{grid-template-columns:1fr; }
+  .hero-media img, .hero-grid{min-height:520px; height:520px}
+}
+@media (max-width: 720px){
+  .brand img{height:36px}
   .cards-3{grid-template-columns:1fr; gap:14px}
-  .hero{padding-top:28px}
-  .brand span{display:none} /* compacta a marca no mobile; remova se preferir */
-}
-
-/* ===================== ACESSIBILIDADE ===================== */
-:focus-visible{
-  outline: 2px solid rgba(255,255,255,.7);
-  outline-offset: 2px;
-}
-@media (prefers-reduced-motion: reduce){
-  *{scroll-behavior: auto !important; transition: none !important}
+  .about .photo img{height:440px}
+  .menu .photo img{height:320px}
+  .hero-copy{padding:18px}
+  .actions .btn{flex:1}
 }
