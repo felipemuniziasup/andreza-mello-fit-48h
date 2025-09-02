@@ -1,43 +1,44 @@
-/* ========= Utils ========= */
-const $  = (q, ctx = document) => ctx.querySelector(q);
+/* ================= Utilidades ================= */
+const $ = (q, ctx = document) => ctx.querySelector(q);
 const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
 
-/* ========= Config WhatsApp ========= */
-const WA_PHONE = "5521995837591"; // +55 21 99583-7591
-const WA_BASE  = `https://wa.me/${WA_PHONE}`;
-const buildWaUrl = (text) => `${WA_BASE}?text=${encodeURIComponent(text || "")}`;
-
-/* ========= Ano no rodapé ========= */
+/* Ano no rodapé */
 (() => {
-  const y = $("#y");
-  if (y) y.textContent = new Date().getFullYear();
+  const el = $("#y");
+  if (el) el.textContent = new Date().getFullYear();
 })();
 
-/* ========= Smooth scroll ========= */
+/* Smooth scroll para âncoras */
 (() => {
   $$('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      const el = document.querySelector(id);
-      if (!el) return;
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const tgt = document.querySelector(id);
+      if (!tgt) return;
       e.preventDefault();
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      history.replaceState(null, "", id);
+      tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', id);
     });
   });
 })();
 
-/* ========= Prefill querystring ========= */
+/* Preenchimento por querystring (nome, telefone, endereco, plano, obs) */
 (() => {
-  const qs = new URLSearchParams(location.search);
-  const map = { nome:"#nome", telefone:"#telefone", endereco:"#endereco", plano:"#planoSel", obs:"#preferencia" };
+  const params = new URLSearchParams(location.search);
+  const map = {
+    nome:'#nome',
+    telefone:'#telefone',
+    endereco:'#endereco',
+    plano:'#planoSel',
+    obs:'#preferencia'
+  };
   Object.entries(map).forEach(([k, sel]) => {
-    const v = qs.get(k);
+    const v = params.get(k);
     const el = $(sel);
     if (!v || !el) return;
-    if (el.tagName === "SELECT") {
-      Array.from(el.options).forEach(o => {
+    if (el.tagName === 'SELECT') {
+      [...el.options].forEach(o => {
         if (o.value.toLowerCase() === v.toLowerCase()) o.selected = true;
       });
     } else {
@@ -46,74 +47,74 @@ const buildWaUrl = (text) => `${WA_BASE}?text=${encodeURIComponent(text || "")}`
   });
 })();
 
-/* ========= Templates bonitos (sem “origem”) ========= */
-const TEMPLATES = {
-  sobre: () => [
-    "🧑‍🍳 *Contato — Andreza Mello Fit*",
-    "",
-    "Olá, Andreza! Vim pelo site e gostaria de conversar com você.",
-    "Pode me chamar quando puder, por favor? Obrigado(a)! 🙌"
-  ].join("\n"),
+/* ================= WhatsApp ================= */
+const PHONE = "5521995837591"; // +55 21 99583-7591
+const WA_BASE = `https://wa.me/${PHONE}`;
 
-  cardapio: () => [
-    "📋 *Cardápio da Semana — Andreza Mello Fit*",
-    "",
-    "Quero receber o cardápio desta semana com os valores.",
-    "Pode me enviar por aqui, por favor? 🙏"
-  ].join("\n"),
+/* Modelos de mensagens por chave (data-wa) */
+const WA_TEMPLATES = {
+  // As que você já usa
+  duvida: [
+    "👋 *Olá, Andreza!*",
+    "Vim pelo site e gostaria de tirar uma dúvida rapidinho.",
+    "— _Enviado pelo site_"
+  ],
+  cardapio: [
+    "🍽️ *Quero receber o cardápio da semana*",
+    "— _Enviado pelo site_"
+  ],
+  sobre: [
+    "👋 *Olá, Andreza!*",
+    "Vim pelo site e quero falar com você.",
+    "— _Enviado pelo site_"
+  ],
 
-  duvida: () => [
-    "💬 *Atendimento — Andreza Mello Fit*",
-    "",
-    "Olá! Vim pelo site e tenho algumas dúvidas.",
-    "Pode me ajudar quando puder? 🙂"
-  ].join("\n"),
-
-  default: () => [
-    "👋 *Olá, vim pelo site da Andreza Mello Fit.*",
-    "Gostaria de mais informações, por favor."
-  ].join("\n")
+  // Reservas para futuro/compatibilidade
+  inicio_pedir: [
+    "🧾 *Quero fazer um pedido*",
+    "— _Enviado pelo site_"
+  ],
+  ver_cardapio: [
+    "🍽️ *Quero receber o cardápio da semana*",
+    "— _Enviado pelo site_"
+  ],
+  falar_com_andreza: [
+    "👋 *Olá Andreza!*",
+    "Quero tirar uma dúvida rapidinho.",
+    "— _Enviado pelo site_"
+  ],
+  topo_whats: [
+    "👋 *Olá Andreza!* Vim pelo site e quero falar com você.",
+    "— _Enviado pelo site_"
+  ]
 };
 
-/* ========= CTAs -> WhatsApp com mensagens bonitas ========= */
+const encodeMsg = (lines) => encodeURIComponent(lines.join("\n"));
+
+/* Intercepta todas as CTAs com .js-wa + data-wa */
 (() => {
-  const sel = [
-    `a[href*="wa.me/${WA_PHONE}"]`,
-    `a[href*="api.whatsapp.com"][href*="${WA_PHONE}"]`,
-    "a.js-wa"
-  ].join(",");
+  $$('.js-wa[data-wa]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const key = el.getAttribute('data-wa');
+      const extra = el.getAttribute('data-wa-extra');
+      const ctaId = el.getAttribute('data-cta'); // só para rastrear internamente/console
 
-  const links = $$(sel);
-  links.forEach(a => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href") || "";
-      if (href.includes("?text=")) return;
+      let lines = WA_TEMPLATES[key] || ["👋 Olá! Vim pelo site.", "— _Enviado pelo site_"];
+      if (extra) lines = [...lines, "", extra];
 
+      const url = `${WA_BASE}?text=${encodeMsg(lines)}`;
       e.preventDefault();
+      window.open(url, "_blank", "noopener");
 
-      const kind   = (a.getAttribute("data-wa") || "").toLowerCase();
-      const custom = a.getAttribute("data-msg");
-
-      let msg;
-      if (kind === "custom" && custom) {
-        msg = custom;
-      } else if (kind && TEMPLATES[kind]) {
-        msg = TEMPLATES[kind]();
-      } else {
-        const label = (a.textContent || "").toLowerCase();
-        if (label.includes("cardápio")) msg = TEMPLATES.cardapio();
-        else if (label.includes("falar") || label.includes("andreza")) msg = TEMPLATES.sobre();
-        else msg = TEMPLATES.default();
+      if (ctaId) {
+        // simples debug local (se quiser enviar para analytics no futuro)
+        console.debug("[CTA]", ctaId, "→", key);
       }
-
-      const url = buildWaUrl(msg);
-      try { window.open(url, "_blank", "noopener"); }
-      catch { location.href = url; }
-    }, { passive: false });
+    });
   });
 })();
 
-/* ========= Form -> WhatsApp (mensagem formatada e limpa) ========= */
+/* Formulário → WhatsApp com mensagem bonita */
 (() => {
   const form = $("#waForm");
   if (!form) return;
@@ -121,25 +122,27 @@ const TEMPLATES = {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const nome  = $("#nome")?.value?.trim() || "";
-    const tel   = $("#telefone")?.value?.trim() || "";
-    const end   = $("#endereco")?.value?.trim() || "";
-    const plano = $("#planoSel")?.value || "Semanal";
-    const pref  = $("#preferencia")?.value?.trim() || "";
+    const nome = $("#nome")?.value?.trim() || "";
+    const tel  = $("#telefone")?.value?.trim() || "";
+    const end  = $("#endereco")?.value?.trim() || "";
+    const plano= $("#planoSel")?.value || "Semanal";
+    const pref = $("#preferencia")?.value?.trim() || "";
 
     const linhas = [
       "🧾 *Novo orçamento — Andreza Mello Fit*",
-      "",
+      "----------------------------------------",
       `👤 *Nome:* ${nome}`,
       `📞 *Telefone:* ${tel}`,
       `📍 *Endereço:* ${end}`,
-      `📦 *Plano:* ${plano}`,
+      `📦 *Plano:* ${plano}`
     ];
     if (pref) linhas.push(`📝 *Preferência:* ${pref}`);
     linhas.push("", "_Enviado pelo site_");
 
-    const url = buildWaUrl(linhas.join("\n"));
-    try { window.open(url, "_blank", "noopener"); }
-    catch { location.href = url; }
+    const url = `${WA_BASE}?text=${encodeURIComponent(linhas.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+
+    const sec = form.closest(".plan");
+    if (sec) sec.scrollIntoView({ behavior:"smooth", block:"start" });
   });
 })();
