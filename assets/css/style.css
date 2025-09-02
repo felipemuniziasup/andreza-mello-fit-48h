@@ -254,3 +254,74 @@ a { color: inherit; text-decoration: none; }
 }
 .footer-wa { color: #9ED9B7; font-weight: 700; }
 .footer-wa:hover { color: #B6F1CF; }
+
+/* ====================== */
+/* HOTFIX HEADER + HERO   */
+/* ====================== */
+
+/* 1) Força estilos de links no header (evita "azul sublinhado" se a classe não vier) */
+.site-header a {
+  color: #EAF2F9 !important;
+  text-decoration: none !important;
+}
+
+/* 2) Garante que os botões do nav existam mesmo se alguém mudar classes no HTML */
+.site-header .nav a {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(221,236,249,.12);
+  background: transparent;
+}
+.site-header .nav a:hover { border-color: rgba(221,236,249,.32); }
+
+/* 3) WhatsApp do header com visual de botão, independentemente do nome da classe */
+.site-header .nav a[href*="wa.me"] {
+  background: #16A34A;
+  border-color: transparent;
+  color: #08131D !important;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 0 18px;
+  box-shadow: 0 10px 28px rgba(21,163,74,.35);
+}
+.site-header .nav a[href*="wa.me"]:hover { background:#19B356; }
+
+/* 4) Logo: limites rígidos por breakpoint (impede de “estourar”) */
+.site-header .site-brand img.logo {
+  height: 28px;           /* mobile default */
+  max-width: 180px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+@media (min-width: 768px) {
+  .site-header .site-brand img.logo { height: 40px; max-width: 240px; }
+}
+@media (min-width: 1024px) {
+  .site-header .site-brand img.logo { height: 56px; max-width: 320px; }
+}
+
+/* 5) Hero: corta a imagem com object-fit pra não ficar desproporcional em telas altas */
+.hero-art {
+  overflow: hidden;
+  border-radius: 18px;
+}
+.hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* em telas bem estreitas, usa proporção controlada pra não ficar infinito de alto */
+@media (max-width: 480px) {
+  .hero-art { aspect-ratio: 4 / 3; }
+}
+
+/* 6) Garantia extra de respiro entre texto e CTA na seção "Sobre a chef" (mobile) */
+.about .cta { margin-top: 24px; }
+@media (min-width: 1024px) {
+  .about .cta { margin-top: 36px; }
+}
