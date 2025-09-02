@@ -3,162 +3,186 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Andreza Mello Fit — Comida saudável, caseira e com sabor</title>
-  <meta name="description" content="Cardápio semanal com opções balanceadas. Peça pelo WhatsApp e receba em casa." />
-  <link rel="icon" href="assets/logo/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" href="assets/logo/favicon-16x16.png" sizes="16x16">
-  <link rel="apple-touch-icon" href="assets/logo/apple-icon-180x180.png">
+  <title>Andreza Mello Fit — Comida saudável</title>
+  <meta name="description" content="Cardápio saudável, caseiro e com sabor de verdade. Personal chef no Rio: Andreza Mello." />
+  <meta name="theme-color" content="#16a34a" />
+  <link rel="icon" href="assets/logo/favicon-32x32.png" sizes="32x32" />
+  <link rel="preload" href="assets/img/hero-campanha.png" as="image" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#topo" aria-label="Andreza Mello Fit - Início">
-        <img src="assets/logo/logo-mello-fit-256.png" alt="Mello Fit" class="brand__logo" />
+  <!-- Navbar -->
+  <header class="nav">
+    <div class="container nav__wrap">
+      <a class="brand" href="#">
+        <img class="brand__logo" src="assets/logo/logo-mello-fit-256.png" alt="Mello Fit" />
         <span class="brand__name">Andreza <strong>Mello Fit</strong></span>
       </a>
-
       <nav class="nav__actions">
-        <a class="btn btn-outline" href="#cardapio">Cardápio</a>
-        <a class="btn btn-primary" target="_blank"
-           href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20card%C3%A1pio%20da%20semana.%20%F0%9F%98%8B">
-          WhatsApp
-        </a>
+        <a class="btn btn--ghost" href="#menu">Cardápio</a>
+        <a class="btn btn--wa" data-wa data-msg="Olá! Quero fazer um pedido. Pode me ajudar?">WhatsApp</a>
       </nav>
     </div>
   </header>
 
-  <main id="topo">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero__grid">
-        <figure class="hero__media">
-          <img src="assets/img/hero-campanha.png" alt="Marmitas saudáveis e apetitosas" loading="eager" />
-        </figure>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__media">
+        <img src="assets/img/hero-campanha.png" alt="Refeições saudáveis prontas" />
+      </div>
+      <div class="hero__copy">
+        <h1>Saudável, caseiro e <br/> com sabor de verdade</h1>
+        <p>Cardápio semanal com opções balanceadas. Preparo cuidadoso e entrega rápida.</p>
+        <div class="hero__cta">
+          <a class="btn" data-wa data-msg="Oi Andreza! Quero pedir agora — pode me orientar?">Peça agora</a>
+          <a class="btn btn--ghost" href="#menu">Ver cardápio</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="hero__content">
-          <h1 class="display">
-            Saudável, caseiro e<br class="lb"> com sabor de verdade
-          </h1>
-          <p class="lead">
-            Cardápio semanal com opções balanceadas. Preparo cuidadoso e entrega rápida.
-          </p>
+  <!-- Diferenciais -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Diferenciais</h2>
+      <div class="cards cards--cols3">
+        <article class="card">
+          <div class="card__icon">🥦</div>
+          <h3 class="card__title">Ingredientes frescos</h3>
+          <p class="card__text">Selecionados diariamente.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">⚖️</div>
+          <h3 class="card__title">Equilíbrio nutricional</h3>
+          <p class="card__text">Porções ideais para o seu dia.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🚚</div>
+          <h3 class="card__title">Entrega pontual</h3>
+          <p class="card__text">Receba no conforto da sua casa.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" target="_blank"
-               href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Quero%20fazer%20um%20pedido.">Peça agora</a>
-            <a class="btn btn-ghost" href="#cardapio">Ver cardápio</a>
+  <!-- Sobre a chef -->
+  <section class="section section--imageLeft">
+    <div class="container split">
+      <div class="split__media">
+        <img src="assets/img/foto-chef.png" alt="Andreza Mello, personal chef" />
+      </div>
+      <div class="split__copy">
+        <h2>Sobre a chef</h2>
+        <p>Sou a <strong>Andreza Mello</strong>, personal chef. Preparo refeições personalizadas, saudáveis e cheias de sabor, conforme seu plano alimentar. Vamos cuidar da sua rotina com praticidade e carinho!</p>
+        <div class="mt-24">
+          <a class="btn btn--wa" data-wa data-msg="Oi Andreza! Quero falar com você.">Falar com a Andreza</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cardápio da semana -->
+  <section id="menu" class="section section--alt">
+    <div class="container split split--reverse">
+      <div class="split__media">
+        <img src="assets/img/hero-prato.png" alt="Prato saudável da semana" />
+      </div>
+      <div class="split__copy">
+        <h2>Cardápio da semana</h2>
+        <p>Opções de proteínas, acompanhamentos e legumes — tudo preparado com carinho de chef.</p>
+        <ul class="list">
+          <li>Filé de tilápia com mix de legumes</li>
+          <li>Frango grelhado com arroz integral</li>
+          <li>Escondidinho (fit) do dia</li>
+        </ul>
+        <div class="mt-24">
+          <a class="btn" data-wa data-msg="Quero receber o cardápio da semana, por favor!">Quero receber o cardápio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimento (embed fiel ao Instagram) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">O que falam da Andreza</h2>
+      <div class="igcard">
+        <img class="igcard__img" src="assets/img/depoimento1.png" alt="Depoimento do Instagram @andrezamellofit" />
+      </div>
+      <blockquote class="quote">
+        “Precisa se alimentar melhor? Está sem tempo para cozinhar? Agende o seu horário com a personal chef!”
+        <cite>@andrezamellofit</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Plano Semanal/Mensal com WhatsApp direto -->
+  <section class="section">
+    <div class="container">
+      <div class="plan">
+        <div class="plan__copy">
+          <h2>Plano Semanal ou Mensal</h2>
+          <p>Preencha rapidinho e fale com a Andreza no WhatsApp para combinar seu plano e orçamento.</p>
+        </div>
+        <form id="planForm" class="plan__form">
+          <div class="grid grid--2">
+            <label class="field">
+              <span>Nome e sobrenome</span>
+              <input type="text" name="nome" placeholder="Seu nome completo" required />
+            </label>
+            <label class="field">
+              <span>Telefone (WhatsApp)</span>
+              <input type="tel" name="telefone" placeholder="(21) 9 9999-9999" required />
+            </label>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIFERENCIAIS -->
-    <section class="features">
-      <div class="container">
-        <h2 class="h2 mb-24">Diferenciais</h2>
-
-        <div class="features__grid">
-          <article class="card">
-            <div class="card__icon">🥦</div>
-            <h3 class="card__title">Ingredientes frescos</h3>
-            <p>Selecionados diariamente.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">⚖️</div>
-            <h3 class="card__title">Equilíbrio nutricional</h3>
-            <p>Porções ideais para o seu dia.</p>
-          </article>
-
-          <article class="card">
-            <div class="card__icon">🚚</div>
-            <h3 class="card__title">Entrega pontual</h3>
-            <p>Receba no conforto da sua casa.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE A CHEF -->
-    <section class="about">
-      <div class="container about__grid">
-        <figure class="about__media">
-          <img src="assets/img/foto-chef.png" alt="Andreza Mello - Personal Chef" loading="lazy" />
-        </figure>
-
-        <div class="about__content">
-          <h2 class="h2">Sobre a chef</h2>
-          <p>
-            Sou a <strong>Andreza Mello</strong>, personal chef. Preparo refeições personalizadas, saudáveis e
-            cheias de sabor, conforme seu plano alimentar. Vamos cuidar da sua rotina com praticidade e carinho!
-          </p>
-          <a class="btn btn-primary" target="_blank"
-             href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Quero%20tirar%20uma%20d%C3%BAvida.">Falar com a Andreza</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CARDÁPIO DA SEMANA -->
-    <section id="cardapio" class="menu">
-      <div class="container">
-        <figure class="menu__media">
-          <img src="assets/img/hero-prato.png" alt="Exemplo de prato do cardápio" loading="lazy" />
-        </figure>
-
-        <div class="menu__content">
-          <h2 class="h2">Cardápio da semana</h2>
-          <p>Opções de proteínas, acompanhamentos e legumes — tudo preparado com carinho de chef.</p>
-          <ul class="menu__list">
-            <li>Filé de tilápia com mix de legumes</li>
-            <li>Frango grelhado com arroz integral</li>
-            <li>Escondidinho (fit) do dia</li>
-          </ul>
-          <a class="btn btn-primary" target="_blank"
-             href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Quero%20receber%20o%20card%C3%A1pio%20da%20semana.">
-             Quero receber o cardápio
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEPOIMENTO (print do Instagram) -->
-    <section class="social-proof">
-      <div class="container">
-        <h2 class="h2 mb-16">O que falam da Andreza</h2>
-        <figure class="proof__media">
-          <img src="assets/img/depoimento1.png" alt="Depoimento de cliente no Instagram" loading="lazy" />
-        </figure>
-      </div>
-    </section>
-
-    <!-- PLANO MENSAL/SEMANAL -->
-    <section class="plan">
-      <div class="container">
-        <div class="plan__box">
-          <h3 class="h3">Plano Semanal ou Mensal</h3>
-          <p>Conte sua preferência (proteínas, restrições, metas). Eu organizo tudo para você.</p>
-          <div class="cta-row">
-            <a class="btn btn-secondary" target="_blank"
-               href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Quero%20conversar%20sobre%20um%20plano%20semanal%2Fmensal.">
-              Quero conversar sobre o plano
-            </a>
+          <label class="field">
+            <span>Endereço</span>
+            <input type="text" name="endereco" placeholder="Rua, número, bairro — RJ" required />
+          </label>
+          <div class="field field--inline">
+            <span class="field__label">Preferência</span>
+            <label class="chip"><input type="radio" name="plano" value="Semanal" checked /> Semanal</label>
+            <label class="chip"><input type="radio" name="plano" value="Mensal" /> Mensal</label>
           </div>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer__row">
+          <!-- opcional: observações curtas, mas não obrigatório -->
+          <label class="field">
+            <span>Observação (opcional)</span>
+            <input type="text" name="obs" placeholder="Ex.: sem lactose, mais proteínas..." />
+          </label>
+
+          <button type="submit" class="btn btn--wa btn--full">Quero conversar sobre o plano</button>
+          <p class="muted">Ao enviar, abriremos o WhatsApp com sua mensagem pré-preenchida.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer simples -->
+  <footer class="footer">
+    <div class="container footer__wrap">
       <small>© 2025 Andreza Mello Fit</small>
-      <a class="footer__wa" target="_blank"
-         href="https://wa.me/5521995837591?text=Oi%20Andreza!%20Vim%20pelo%20site.">WhatsApp</a>
+      <a class="btn btn--ghost" data-wa data-msg="Oi Andreza! Vim pelo site e quero falar com você.">WhatsApp</a>
     </div>
   </footer>
 
-  <script src="assets/js/app.js"></script>
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Abrindo WhatsApp…</div>
+
+  <!-- Botão flutuante WhatsApp (menu multi-ação) -->
+  <div class="fab" data-fab>
+    <button class="fab__main" aria-label="Abrir opções de WhatsApp">
+      <img src="assets/logo/favicon-32x32.png" alt="" />
+      <span>WhatsApp</span>
+    </button>
+    <div class="fab__menu">
+      <button class="fab__item" data-wa data-msg="Quero receber o cardápio da semana, por favor!">📄 Cardápio</button>
+      <button class="fab__item" data-wa data-msg="Oi Andreza! Quero falar com você.">💬 Falar com a Andreza</button>
+      <button class="fab__item" data-wa data-msg="Quero um plano (semana/mês). Pode me orientar?">📅 Plano Semanal/Mensal</button>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
