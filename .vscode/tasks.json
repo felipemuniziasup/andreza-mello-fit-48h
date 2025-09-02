@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Deploy Automático",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy", "Bypass",
+        "-Command",
+        "$ErrorActionPreference='Stop'; $date = Get-Date -Format 'yyyy-MM-dd HH:mm'; $version = git tag --sort=-v:refname | Select-Object -First 1; if ($version -match 'v(\\d+)\\.(\\d+)\\.(\\d+)') { $major=[int]$matches[1]; $minor=[int]$matches[2]; $patch=[int]$matches[3]+1; $newTag = 'v' + $major + '.' + $minor + '.' + $patch } else { $newTag = 'v1.0.0' }; git add .; if (git diff --cached --quiet) { Write-Host 'Sem mudanças para commit.' } else { git commit -m ('Deploy automático em ' + $date + ' [' + $newTag + ']') }; git tag -f $newTag; git push; git push --tags; Start-Sleep -Seconds 2; Start-Process 'https://felipemuniziasup.github.io/andreza-mello-fit-48h/'"
+      ],
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,81 +1,143 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Andreza Mello Fit — Comida Saudável</title>
-  <meta name="description" content="Comida saudável e saborosa. Peça pelo WhatsApp.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andreza Mello Fit — Comida saudável e prática</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- SEO básico -->
+  <meta name="description" content="Cardápio semanal com opções balanceadas, delivery rápido e sabor de comida caseira. Peça agora pelo WhatsApp.">
+  <link rel="icon" href="assets/logo/favicon.ico" type="image/x-icon">
 
-  <!-- Styles (CAMINHO CORRETO) -->
-  <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/logo/favicon.ico">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Andreza Mello Fit — Comida Saudável">
-  <meta property="og:description" content="Comida saudável e saborosa. Peça pelo WhatsApp.">
-  <meta property="og:image" content="assets/logo/logo-mello-fit-1024.png">
-  <meta property="og:type" content="website">
+  <!-- CSS -->
+  <link rel="preload" as="style" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
-<header>
-  <div class="container bar">
-    <div class="brand">
-      <img src="assets/logo/logo-mello-fit-256.png" alt="Andreza Mello Fit">
-      <strong>Andreza Mello Fit</strong>
-    </div>
-    <nav>
-      <a class="btn" href="#cardapio">Cardápio</a>
-      <a class="btn whatsapp" data-cta>WhatsApp</a>
-    </nav>
-  </div>
-</header>
 
-<main class="container">
-  <section class="hero" id="inicio">
-    <img src="assets/img/hero.jpg" alt="Comida saudável">
-    <div>
-      <h1>Saudável, caseiro e com sabor de verdade</h1>
-      <p>Cardápio semanal com opções balanceadas. Preparo cuidadoso e entrega rápida.</p>
-      <div style="display:flex;gap:12px;margin-top:10px">
-        <a class="btn whatsapp" data-cta>Peça agora</a>
-        <a class="btn" href="#cardápio">Ver cardápio</a>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <img class="brand__logo" src="assets/logo/logo-mello-fit-64.png" width="36" height="36" alt="Logo Andreza Mello Fit">
+        <span class="brand__name">Andreza Mello Fit</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="#cardapio" class="btn btn--ghost">Cardápio</a>
+        <a id="btnWhatsHeader" class="btn btn--whats" href="#" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__media" role="img" aria-label="Marmitas saudáveis">
+        <!-- imagem via CSS (hero-campanha.png) com fallback abaixo -->
+        <img class="hero__fallback" src="assets/img/hero-campanha.png" alt="Marmitas saudáveis" loading="eager" />
+      </div>
+
+      <div class="hero__content">
+        <h1>Saudável, caseiro e<br>com sabor de verdade</h1>
+        <p>Cardápio semanal com opções balanceadas. Preparo cuidadoso e entrega rápida.</p>
+
+        <div class="hero__cta">
+          <a id="btnWhatsHero" class="btn btn--primary" href="#" rel="noopener">Peça agora</a>
+          <a class="btn btn--ghost" href="#cardapio">Ver cardápio</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="diferenciais">
-    <h2>Diferenciais</h2>
-    <div class="grid">
-      <div class="card"><strong>Ingredientes frescos</strong><p>Selecionados diariamente.</p></div>
-      <div class="card"><strong>Equilíbrio nutricional</strong><p>Porções ideais para o seu dia.</p></div>
-      <div class="card"><strong>Entrega pontual</strong><p>Receba no conforto da sua casa.</p></div>
+  <!-- DIFERENCIAIS -->
+  <section class="features">
+    <div class="container">
+      <h2>Diferenciais</h2>
+      <div class="features__grid">
+        <article class="card">
+          <h3>Ingredientes frescos</h3>
+          <p>Selecionados diariamente.</p>
+        </article>
+        <article class="card">
+          <h3>Equilíbrio nutricional</h3>
+          <p>Porções ideais para o seu dia.</p>
+        </article>
+        <article class="card">
+          <h3>Entrega pontual</h3>
+          <p>Receba no conforto da sua casa.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section id="cardapio" style="margin-top:24px">
-    <h2>Cardápio (exemplo)</h2>
-    <div class="grid">
-      <div class="card"><strong>Frango + arroz integral</strong><p>R$ 24,90</p></div>
-      <div class="card"><strong>Carne magra + legumes</strong><p>R$ 27,90</p></div>
-      <div class="card"><strong>Veggie bowl</strong><p>R$ 22,90</p></div>
+  <!-- CARDÁPIO (ancora simples) -->
+  <section id="cardapio" class="menu">
+    <div class="container menu__grid">
+      <figure class="menu__figure">
+        <img src="assets/img/hero-prato.png" alt="Prato saudável de exemplo" loading="lazy">
+      </figure>
+      <div class="menu__content">
+        <h2>Cardápio da semana</h2>
+        <p>Opções de proteínas, acompanhamentos e legumes — tudo preparado com carinho de chef.</p>
+        <ul class="menu__list">
+          <li>Filé de tilápia com mix de legumes</li>
+          <li>Frango grelhado com arroz integral</li>
+          <li>Escondidinho (fit) do dia</li>
+        </ul>
+        <a id="btnWhatsMenu" class="btn btn--primary" href="#" rel="noopener">Quero receber o cardápio</a>
+      </div>
     </div>
   </section>
-</main>
 
-<footer>
-  <div class="container">
-    © 2025 Andreza Mello Fit • <a href="#" data-cta>WhatsApp</a>
-  </div>
-</footer>
+  <!-- DEPOIMENTO -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>O que falam da Andreza</h2>
 
-<!-- Script (CAMINHO CORRETO) -->
-<script src="assets/js/app.js"></script>
+      <div class="testimonial">
+        <img class="testimonial__img" src="assets/img/depoimento1.png" alt="Print de comentário no Instagram" loading="lazy">
+        <div class="testimonial__copy">
+          <p>“Precisa se alimentar melhor? Está sem tempo para cozinhar? Agende o seu horário com a personal chef!”</p>
+          <span class="testimonial__meta">@andrezamellofit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="about">
+    <div class="container about__grid">
+      <div class="about__copy">
+        <h2>Sobre a chef</h2>
+        <p>Sou a <strong>Andreza Mello</strong>, personal chef. Preparo refeições personalizadas, saudáveis e cheias de sabor, conforme seu plano alimentar. Vamos cuidar da sua rotina com praticidade e carinho!</p>
+
+        <a id="btnWhatsAbout" class="btn btn--whats" href="#" rel="noopener">Falar com a Andreza</a>
+      </div>
+      <figure class="about__figure">
+        <img src="assets/img/foto-chef.png" alt="Andreza Mello — Personal Chef" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- CONTATO RÁPIDO -->
+  <section class="cta">
+    <div class="container cta__box">
+      <h3>Plano Semanal ou Mensal</h3>
+      <p>Conte sua preferência (proteínas, restrições, metas). Eu organizo tudo para você.</p>
+      <a id="btnWhatsPlano" class="btn btn--primary" href="#" rel="noopener">Quero conversar sobre o plano</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>© <span id="year"></span> Andreza Mello Fit</small>
+      <a class="footer__whats" id="btnWhatsFooter" href="#" rel="noopener">WhatsApp</a>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
