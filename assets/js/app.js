@@ -1,72 +1,89 @@
-(function () {
-  // Ano no rodapé
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
+/* Utilidades simples */
+const $ = (q, ctx = document) => ctx.querySelector(q);
+const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
 
-  // Scroll suave para âncoras internas
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
+/* Ano no rodapé */
+(() => {
+  const y = new Date().getFullYear();
+  const el = $("#y");
+  if (el) el.textContent = y;
+})();
+
+/* Smooth scroll para âncoras internas */
+(() => {
+  $$('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href');
-      const el = document.querySelector(id);
-      if (el) {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', id);
     });
   });
+})();
 
-  // Base do WhatsApp: mobile x desktop
-  function getWhatsAppBaseURL() {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    return isMobile ? 'https://api.whatsapp.com/send' : 'https://web.whatsapp.com/send';
-  }
-
-  // Form -> WhatsApp
-  const form = document.getElementById('waForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const nome = (document.getElementById('nome')?.value || '').trim();
-      const telefone = (document.getElementById('telefone')?.value || '').trim();
-      const endereco = (document.getElementById('endereco')?.value || '').trim();
-      const plano = (document.getElementById('plano')?.value || '').trim();
-      const pref = (document.getElementById('preferencia')?.value || '').trim();
-
-      // Mensagem formatada (sem %0A aparecendo – usamos encodeURIComponent no final)
-      let msg =
-        '🧾 *Novo orçamento — Andreza Mello Fit*\n' +
-        '———————————————\n' +
-        '👤 *Nome:* ' + nome + '\n' +
-        '📱 *Telefone:* ' + telefone + '\n' +
-        '📍 *Endereço:* ' + endereco + '\n' +
-        '📦 *Plano:* ' + plano;
-
-      if (pref) {
-        msg += '\n🍽️ *Preferência:* ' + pref;
+/* Preenchimento automático por querystring (nome, telefone, endereco, plano, obs) */
+(() => {
+  const params = new URLSearchParams(location.search);
+  const map = {
+    nome: "#nome",
+    telefone: "#telefone",
+    endereco: "#endereco",
+    plano: "#planoSel",
+    obs: "#preferencia"
+  };
+  Object.entries(map).forEach(([k, sel]) => {
+    const v = params.get(k);
+    const el = $(sel);
+    if (v && el) {
+      if (el.tagName === 'SELECT') {
+        Array.from(el.options).forEach(o => { if (o.value.toLowerCase() === v.toLowerCase()) o.selected = true; });
+      } else {
+        el.value = decodeURIComponent(v);
       }
-      msg += '\n\n_Enviado pelo site_';
+    }
+  });
+})();
 
-      const encoded = encodeURIComponent(msg);
-      const base = getWhatsAppBaseURL();
-      const phone = '5521999587591'; // número da Andreza
+/* Form WhatsApp — mensagem bonita com ícones (sem alterar layout) */
+(() => {
+  const form = $("#waForm");
+  if (!form) return;
 
-      const url = `${base}?phone=${phone}&text=${encoded}`;
+  const endpoint = "https://wa.me/55219995837591"; // ajuste se precisar
 
-      // Abrir em nova aba sem alterar layout da página
-      window.open(url, '_blank', 'noopener');
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-      // Feedback discreto (opcional)
-      const btn = form.querySelector('button[type="submit"]');
-      if (btn) {
-        const prev = btn.textContent;
-        btn.textContent = 'Abrindo WhatsApp…';
-        btn.disabled = true;
-        setTimeout(() => {
-          btn.textContent = prev;
-          btn.disabled = false;
-        }, 2000);
-      }
-    });
-  }
+    const nome = $("#nome")?.value?.trim() || "";
+    const tel  = $("#telefone")?.value?.trim() || "";
+    const end  = $("#endereco")?.value?.trim() || "";
+    const plano= $("#planoSel")?.value || "Semanal";
+    const pref = $("#preferencia")?.value?.trim() || "";
+
+    // Mensagem formatada (Markdown do WhatsApp + emojis)
+    const linhas = [
+      "🧾 *Novo orçamento — Andreza Mello Fit*",
+      "----------------------------------------",
+      `👤 *Nome:* ${nome}`,
+      `📞 *Telefone:* ${tel}`,
+      `📍 *Endereço:* ${end}`,
+      `📦 *Plano:* ${plano}`
+    ];
+    if (pref) linhas.push(`📝 *Preferência:* ${pref}`);
+    linhas.push("", "_Enviado pelo site_");
+
+    const msg = encodeURIComponent(linhas.join("\n"));
+    const url = `${endpoint}?text=${msg}`;
+
+    // Abre o WhatsApp em nova aba/janela
+    window.open(url, "_blank", "noopener");
+
+    // Não mexe no DOM do formulário -> evita "mudar de forma"
+    // Porém, podemos focar o topo da seção para feedback visual
+    const sec = form.closest(".plan");
+    if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 })();
