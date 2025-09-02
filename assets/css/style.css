@@ -31,17 +31,17 @@ img{max-width:100%; height:auto; display:block}
 
 /* ====== Header fixo (logo maior) ====== */
 .site-header{
-  position:fixed; inset:0 0 auto 0; height:88px; z-index:1000;
+  position:fixed; inset:0 0 auto 0; height:104px; z-index:1000; /* antes 88px */
   background: linear-gradient(180deg, rgba(3,10,18,.78), rgba(3,10,18,.42));
   backdrop-filter: blur(8px);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 .header-inner{
-  height:88px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  height:104px; display:flex; align-items:center; justify-content:space-between; gap:16px; /* antes 88px */
 }
 .brand{display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--white)}
 .brand-logo{
-  height: clamp(40px, 5.8vw, 64px);
+  height: clamp(56px, 7.2vw, 88px); /* antes clamp(40px, 5.8vw, 64px) */
   width: auto;
   filter: drop-shadow(0 8px 18px rgba(0,0,0,.25));
 }
@@ -49,7 +49,7 @@ img{max-width:100%; height:auto; display:block}
 .main-nav{display:flex; gap:12px}
 
 /* compensar header fixo */
-main{padding-top:98px}
+main{padding-top:116px} /* antes 98px */
 
 /* ====== Botões ====== */
 .btn{
@@ -186,7 +186,7 @@ input::placeholder{color:rgba(255,255,255,.45)}
 @media (max-width: 720px){
   .main-nav .btn{padding:10px 14px}
   .grid-2{grid-template-columns: 1fr}
-  .brand-logo{height:60px} /* antes 42px */
+  .brand-logo{height:76px} /* antes 60px */
   .card-grid{grid-template-columns: 1fr}
   .hero-media img{height: clamp(240px, 55vw, 360px)}
 }
