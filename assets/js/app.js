@@ -39,7 +39,9 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
     const el = $(sel);
     if (v && el) {
       if (el.tagName === 'SELECT') {
-        Array.from(el.options).forEach(o => { if (o.value.toLowerCase() === v.toLowerCase()) o.selected = true; });
+        Array.from(el.options).forEach(o => { 
+          if (o.value.toLowerCase() === v.toLowerCase()) o.selected = true; 
+        });
       } else {
         el.value = decodeURIComponent(v);
       }
@@ -52,27 +54,27 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
   const form = $("#waForm");
   if (!form) return;
 
-  // ✅ Número CORRETO da Andreza (WhatsApp)
+  // Número correto da Andreza (sem espaços ou traços)
   const WA_PHONE = "5521995837591";
   const endpoint = `https://wa.me/${WA_PHONE}`;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const nome = ($("#nome")?.value || "").trim();
-    const tel  = ($("#telefone")?.value || "").trim();
-    const end  = ($("#endereco")?.value || "").trim();
+    const nome = $("#nome")?.value?.trim() || "";
+    const tel  = $("#telefone")?.value?.trim() || "";
+    const end  = $("#endereco")?.value?.trim() || "";
     const plano= $("#planoSel")?.value || "Semanal";
-    const pref = ($("#preferencia")?.value || "").trim();
+    const pref = $("#preferencia")?.value?.trim() || "";
 
     // Mensagem formatada (Markdown do WhatsApp + emojis)
     const linhas = [
       "🧾 *Novo orçamento — Andreza Mello Fit*",
       "----------------------------------------",
-      `👤 *Nome:* ${nome || "-"}`,
-      `📞 *Telefone:* ${tel || "-"}`,
-      `📍 *Endereço:* ${end || "-"}`,
-      `📦 *Plano:* ${plano || "-"}`
+      `👤 *Nome:* ${nome}`,
+      `📞 *Telefone:* ${tel}`,
+      `📍 *Endereço:* ${end}`,
+      `📦 *Plano:* ${plano}`
     ];
     if (pref) linhas.push(`📝 *Preferência:* ${pref}`);
     linhas.push("", "_Enviado pelo site_");
@@ -83,7 +85,7 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
     // Abre o WhatsApp em nova aba/janela
     window.open(url, "_blank", "noopener");
 
-    // Não mexe no DOM do formulário -> evita "mudar de forma"
+    // Mantém o layout estável, apenas dá um feedback visual
     const sec = form.closest(".plan");
     if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
   });
