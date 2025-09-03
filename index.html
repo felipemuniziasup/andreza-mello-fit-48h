@@ -18,18 +18,18 @@
   <!-- HEADER (fixo) -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#topo" class="brand">
+      <a href="#topo" class="brand" aria-label="Ir para o topo">
         <img src="assets/logo/logo-mello-fit.png" alt="Andreza Mello Fit" class="brand-logo" />
         <span class="brand-name"><strong>Andreza</strong> Mello Fit</span>
       </a>
 
-      <nav class="main-nav">
+      <nav class="main-nav" aria-label="Navegação principal">
         <a href="#cardapio" class="btn btn-ghost">Cardápio</a>
 
-        <!-- CTA com data-wa + rastreio -->
+        <!-- CTA com mensagem e rastreio -->
         <a href="https://wa.me/5521995837591"
            class="btn btn-whats js-wa"
-           data-wa="duvida"
+           data-wa="topo_whats"
            data-cta="Header • WhatsApp">
           WhatsApp
         </a>
@@ -41,10 +41,8 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
-        <picture class="hero-media media-box">
-          <img src="assets/img/hero-campanha.png"
-               alt="Refeições caseiras, saudáveis e saborosas"
-               class="auto-fit">
+        <picture class="hero-media">
+          <img src="assets/img/hero-campanha.png" alt="Refeições caseiras, saudáveis e saborosas">
         </picture>
 
         <div class="hero-copy">
@@ -57,7 +55,7 @@
             <!-- CTA com template de cardápio -->
             <a href="https://wa.me/5521995837591"
                class="btn btn-ghost js-wa"
-               data-wa="cardapio"
+               data-wa="ver_cardapio"
                data-cta="Hero • Ver Cardápio">
               Ver cardápio pelo WhatsApp
             </a>
@@ -96,10 +94,8 @@
     <!-- SOBRE A CHEF -->
     <section class="about" id="sobre">
       <div class="container about-grid">
-        <div class="about-media media-box">
-          <img src="assets/img/foto-chef.png"
-               alt="Andreza Mello, personal chef"
-               class="auto-fit">
+        <div class="about-media">
+          <img src="assets/img/foto-chef.png" alt="Andreza Mello, personal chef">
         </div>
 
         <div class="about-copy">
@@ -111,7 +107,7 @@
           <!-- CTA personalizada “sobre” -->
           <a href="https://wa.me/5521995837591"
              class="btn btn-primary js-wa"
-             data-wa="sobre"
+             data-wa="falar_com_andreza"
              data-cta="Sobre • Falar com a Andreza">
             Falar com a Andreza
           </a>
@@ -122,10 +118,8 @@
     <!-- CARDÁPIO DA SEMANA -->
     <section class="menu" id="cardapio">
       <div class="container menu-grid">
-        <div class="menu-media media-box">
-          <img src="assets/img/hero-prato.png"
-               alt="Prato da semana"
-               class="auto-fit">
+        <div class="menu-media">
+          <img src="assets/img/hero-prato.png" alt="Prato da semana">
         </div>
 
         <div class="menu-copy">
@@ -135,7 +129,7 @@
           <!-- CTA cardápio -->
           <a href="https://wa.me/5521995837591"
              class="btn btn-primary js-wa"
-             data-wa="cardapio"
+             data-wa="ver_cardapio"
              data-cta="Cardápio • Receber cardápio">
             Receber cardápio no WhatsApp
           </a>
@@ -190,13 +184,11 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© <span id="y"></span> Andreza Mello Fit —
+      <p>© <span id="y"></span> Andreza Mello Fit — 
         <a href="https://wa.me/5521995837591"
            class="js-wa"
            data-wa="duvida"
-           data-cta="Footer • WhatsApp">
-          WhatsApp
-        </a>
+           data-cta="Footer • WhatsApp">WhatsApp</a>
       </p>
     </div>
   </footer>

@@ -17,9 +17,10 @@ html,body{margin:0;padding:0}
 body{
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, Helvetica, sans-serif;
   color:var(--text);
-  background: radial-gradient(1200px 600px at 30% -20%, #0d2b45 0%, transparent 60%),
-              radial-gradient(1200px 600px at 70% -10%, #092038 0%, transparent 60%),
-              linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  background:
+    radial-gradient(1200px 600px at 30% -20%, #0d2b45 0%, transparent 60%),
+    radial-gradient(1200px 600px at 70% -10%, #092038 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
   line-height:1.5;
 }
 
@@ -80,36 +81,29 @@ main{padding-top:98px}
 
 .btn-whats{background:linear-gradient(180deg, #25D366, #1ea653)}
 
-/* ====== Blocos de mídia sem corte (automático) ====== */
-.media-box{
-  border-radius:24px;
-  overflow:hidden;
-  background:rgba(255,255,255,.04);
-  box-shadow: var(--shadow);
-  aspect-ratio: var(--ar, 16/10);
-}
-.media-box img{
-  width:100%;
-  height:100%;
-  object-fit: contain;          /* mostra a imagem inteira, sem cortar */
-  object-position:center;
-  background:#0c2135;
-  display:block;
-}
-
 /* ====== Hero ====== */
 .hero{padding: clamp(24px, 2vw, 32px) 0 32px}
 .hero-grid{
   display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 2.2vw, 36px); align-items:center;
 }
-.hero .media-box{ max-height: clamp(280px, 36vw, 520px); }
+.hero-media{
+  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04);
+  box-shadow: var(--shadow);
+}
+.hero-media img{
+  width:100%; height: clamp(280px, 36vw, 520px);
+  object-fit: cover; object-position:center;
+  display:block;
+}
 .hero-copy h1{margin:0 0 12px; font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem)}
 .hero-copy p{color:var(--muted); margin:0 0 18px}
 .cta-row{display:flex; gap:12px; flex-wrap:wrap}
 
 /* ====== Features ====== */
 .features{padding: 28px 0 10px}
-.card-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+.card-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;
+}
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.06);
@@ -121,14 +115,27 @@ main{padding-top:98px}
 /* ====== Sobre ====== */
 .about{padding: 18px 0 12px}
 .about-grid{
-  /* ↓ gap menor para aproximar foto e texto no desktop */
-  display:grid; grid-template-columns: 1fr 1.05fr; gap: clamp(12px, 1.5vw, 20px);
+  display:grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(8px, 1.2vw, 16px);     /* distância menor entre foto e texto no desktop */
   align-items:center;
 }
-.about .media-box{ border-radius:28px; max-height: clamp(320px, 38vw, 560px); }
+.about-media{
+  border-radius:28px; overflow:hidden; box-shadow: var(--shadow);
+  background:rgba(255,255,255,.04);
+  margin-inline:auto;               /* garante centralização do bloco */
+  display:block;
+}
+.about-media img{
+  width:100%;
+  height: clamp(320px, 38vw, 560px);
+  object-fit: cover;
+  object-position: 50% 28%;         /* foco sobe levemente no desktop */
+}
+.about-copy{
+  padding-left: clamp(0px, .6vw, 8px); /* aproxima o texto da foto sem encostar */
+}
 .about-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
-/* ↓ um leve padding para equilibrar a aproximação */
-.about-copy{ padding-left: clamp(4px, .8vw, 12px); }
 .about-copy p{color:var(--muted); margin:0 0 10px}
 .about-copy .btn{margin-top:10px}
 
@@ -137,7 +144,12 @@ main{padding-top:98px}
 .menu-grid{
   display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(18px, 2vw, 30px); align-items:center;
 }
-.menu .media-box{ max-height: clamp(300px, 36vw, 520px); }
+.menu-media{
+  border-radius:24px; overflow:hidden; background:rgba(255,255,255,.04); box-shadow: var(--shadow);
+}
+.menu-media img{
+  width:100%; height: clamp(300px, 36vw, 520px); object-fit: cover; object-position:center;
+}
 .menu-copy h2{margin:0 0 10px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem)}
 .menu-copy p{color:var(--muted); margin:0 0 16px}
 
@@ -168,12 +180,18 @@ input::placeholder{color:rgba(255,255,255,.45)}
   .about-grid,
   .menu-grid{grid-template-columns: 1fr}
 
-  /* quadros mais altos e CENTRALIZAÇÃO da foto no mobile */
-  .about .media-box{
-    max-height: clamp(320px, 60vw, 560px);
-    margin-inline:auto;              /* centraliza o bloco de imagem */
+  /* Sobre: quadro mais alto e foto centralizada no mobile */
+  .about-media{
+    aspect-ratio: 3 / 4;
+    margin-inline:auto;            /* centraliza o bloco da imagem */
+    max-width:min(560px, 92vw);
   }
-  .menu  .media-box{ max-height: clamp(300px, 55vw, 520px); }
+  .about-media img{
+    height: 100%;
+    object-position: 50% 23%;      /* leve ajuste de foco no mobile */
+  }
+
+  .menu-media img{height: clamp(280px, 50vw, 420px)}
 }
 
 @media (max-width: 720px){
@@ -181,5 +199,5 @@ input::placeholder{color:rgba(255,255,255,.45)}
   .grid-2{grid-template-columns: 1fr}
   .brand-logo{height:60px} /* logo maior no mobile */
   .card-grid{grid-template-columns: 1fr}
-  .hero .media-box{ max-height: clamp(240px, 55vw, 360px); }
+  .hero-media img{height: clamp(240px, 55vw, 360px)}
 }

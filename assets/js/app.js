@@ -8,7 +8,7 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
   if (el) el.textContent = new Date().getFullYear();
 })();
 
-/* Smooth scroll */
+/* Smooth scroll para âncoras */
 (() => {
   $$('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -43,48 +43,55 @@ const $$ = (q, ctx = document) => Array.from(ctx.querySelectorAll(q));
 
 /* ========= WhatsApp ========= */
 
-const PHONE  = "5521995837591";   // +55 21 99583-7591 (somente dígitos)
+const PHONE  = "5521995837591";                  // +55 21 99583-7591 (somente dígitos)
 const WA_BASE = `https://wa.me/${PHONE}`;
 
 /* Mensagens pré-formatadas por CTA (data-wa) */
 (() => {
-  const defaults = {
-    inicio_pedir: [
-      "🧾 *Quero fazer um pedido*",
+  const templates = {
+    topo_whats: [
+      "👋 *Olá, Andreza!* Vim pelo site e quero falar com você.",
       "— Enviado pelo site"
     ],
-    cardapio: [
+    ver_cardapio: [
       "🍽️ *Quero receber o cardápio da semana*",
+      "Pode me mandar por aqui?",
       "— Enviado pelo site"
     ],
-    sobre: [
-      "👋 *Olá Andreza!*",
-      "Quero tirar uma dúvida rapidinho.",
+    falar_com_andreza: [
+      "👋 *Olá, Andreza!*",
+      "Tenho uma dúvida rápida sobre as refeições.",
       "— Enviado pelo site"
     ],
     duvida: [
-      "👋 *Olá Andreza!* Vim pelo site e quero falar com você.",
+      "❓ *Dúvida rápida*",
+      "Vi seu site e gostaria de mais informações.",
       "— Enviado pelo site"
     ]
   };
 
-  const toMsg = (lines) => encodeURIComponent(lines.join("\n"));
+  const enc = (lines) => encodeURIComponent(lines.join("\n"));
 
-  $$(".js-wa").forEach(el => {
-    el.addEventListener("click", (e) => {
-      const key = el.getAttribute("data-wa");
-      let msgLines = defaults[key] || ["👋 Olá! Vim pelo site."];
-      const extra = el.getAttribute("data-wa-extra");
-      if (extra) msgLines = [...msgLines, "", extra];
+  $$('.js-wa').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const key = el.getAttribute('data-wa');
+      const lines = templates[key] || ["👋 Olá! Vim pelo site."];
+      const extra = el.getAttribute('data-wa-extra');
+      const msg = extra ? [...lines, "", extra] : lines;
 
-      const url = `${WA_BASE}?text=${toMsg(msgLines)}`;
+      const url = `${WA_BASE}?text=${enc(msg)}`;
+
+      // opcional: rastro mínimo em data-cta (apenas no console)
+      const where = el.getAttribute('data-cta');
+      if (where) console.info("[CTA]", where);
+
       e.preventDefault();
       window.open(url, "_blank", "noopener");
     });
   });
 })();
 
-/* Formulário -> WhatsApp com mensagem bonita */
+/* Formulário -> WhatsApp com mensagem formatada */
 (() => {
   const form = $("#waForm");
   if (!form) return;
@@ -112,27 +119,8 @@ const WA_BASE = `https://wa.me/${PHONE}`;
     const url = `${WA_BASE}?text=${encodeURIComponent(linhas.join("\n"))}`;
     window.open(url, "_blank", "noopener");
 
+    // feedback suave sem alterar o layout
     const sec = form.closest(".plan");
     if (sec) sec.scrollIntoView({ behavior:"smooth", block:"start" });
-  });
-})();
-
-/* ====== Auto-fit das imagens (sem corte) ======
-   Lê largura/altura reais e define aspect-ratio no contêiner (.media-box).
-   Funciona para .auto-fit dentro de .media-box (hero, sobre, cardápio). */
-(() => {
-  const imgs = document.querySelectorAll(".media-box > .auto-fit");
-  const setAR = (img) => {
-    const box = img.parentElement;
-    if (!box) return;
-    const w = img.naturalWidth;
-    const h = img.naturalHeight;
-    if (w && h) {
-      box.style.aspectRatio = `${w} / ${h}`;
-    }
-  };
-  imgs.forEach(img => {
-    if (img.complete) setAR(img);
-    else img.addEventListener("load", () => setAR(img), { once:true });
   });
 })();
